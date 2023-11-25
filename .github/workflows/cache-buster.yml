@@ -4,8 +4,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Find and Replace ARM64
-        uses: seripap/gha-find-replace@1.0.1
+      - name: Find-and-replace strings
+        uses: mad9000/actions-find-and-replace-string@4
         with:
-          find: "page<"
-          replace: "page!!!<"
+          source: ${{ github.ref }}
+          find: 'page<'
+          replace: 'page!!!<'

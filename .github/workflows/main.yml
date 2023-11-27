@@ -12,5 +12,12 @@ jobs:
         with:
           python-version: 3.12
       # You can test your matrix by printing the current Python version
-      - name: Test
+      - name: Run Python file
         run: python ".github/workflows/cache_buster.py" --noinput
+      - name: Commit and push changes
+        run: |
+          git config --global user.name TamerSoup625
+          git config --global user.email danielegiunta2007@gmail.com
+          git add -A
+          git commit -m "commit message"
+          git push

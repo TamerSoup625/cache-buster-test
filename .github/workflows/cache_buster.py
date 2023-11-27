@@ -31,6 +31,7 @@ def main():
     import argparse
     from fnmatch import fnmatch
     from random import randint
+    BUSTER_CONFIG_PATH = ".github/workflows/buster.config"
 
     parser = argparse.ArgumentParser(prog="Cache Buster", description="Bustes HTML browser cache on files using query strings.", epilog="Since I couldn't get newline to work with argparse, read what this script does in the code.")
     parser.add_argument("--noinput", action="store_true", help="Run this file without asking for input. All filenames' query string will be cache busted")
@@ -38,15 +39,15 @@ def main():
     noinput = args.noinput
 
     try:
-        config = open("buster.config", "r")
+        config = open(BUSTER_CONFIG_PATH, "r")
     except FileNotFoundError:
         print("buster.config not found. Create a default config file? ALL files in this folder will be targeted. (s/n)")
         if(input("-> ") != "s"):
             return
-        config = open("buster.config", "x")
+        config = open(BUSTER_CONFIG_PATH, "x")
         config.write("**TARGETS\n*")
         config.close()
-        config = open("buster.config", "r")
+        config = open(BUSTER_CONFIG_PATH, "r")
     current_type = None
     targets = []
     excluded = []
@@ -93,7 +94,7 @@ def main():
         for filename in files:
             path = os.path.join(root, filename)[2:]
 
-            if(path == os.path.basename(__file__) or path == "buster.config"):
+            if(path == os.path.basename(__file__) or path == BUSTER_CONFIG_PATH):
                 continue # Skip iteration
             if(all(not fnmatch(path, x) for x in targets)):
                 continue # Skip iteration

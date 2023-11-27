@@ -13,4 +13,4 @@ jobs:
           python-version: 3.12
       # You can test your matrix by printing the current Python version
       - name: Test
-        run: python cache_buster.py -c --noinput
+        run: python ".github/workflows/cache_buster.py" -c --noinput

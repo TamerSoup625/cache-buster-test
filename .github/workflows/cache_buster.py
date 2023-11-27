@@ -111,6 +111,7 @@ def main():
             
             if(__debug__):
                 _files_targeted += 1
+                print("Targeted", path)
             
             splitted = re.split(re_pattern, data).copy()
             for i in range(2, len(splitted), 3):
